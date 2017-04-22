@@ -1,0 +1,121 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "databaseAccounts_gab_nosql_dev01_name": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+        "databaseAccounts_gab_nosql_dev01_name_1": {
+            "defaultValue": "gab-nosql-dev01",
+            "type": "String"
+        },
+        "components_gab_dev01_name": {
+            "defaultValue": "gab-dev01",
+            "type": "String"
+        },
+        "storageAccounts_gabstoragedev01_name": {
+            "defaultValue": "gabstoragedev01",
+            "type": "String"
+        },
+        "sites_gab_dev01_name": {
+            "defaultValue": "gab-dev01",
+            "type": "String"
+        },
+        "sites_gab_dev01_serverFarmId": {
+            "defaultValue": "/subscriptions/170f5740-3e45-4a68-a9f8-435d6fc3c166/resourceGroups/Default-Web-EastUS/providers/Microsoft.Web/serverfarms/Default1",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/170f5740-3e45-4a68-a9f8-435d6fc3c166/resourceGroups/GAB-Dev01/providers/Microsoft.DocumentDB/databaseAccounts/gab-nosql-dev01'.",
+            "type": "Microsoft.DocumentDB/databaseAccounts",
+            "kind": "MongoDB",
+            "name": "[parameters('databaseAccounts_gab_nosql_dev01_name_1')]",
+            "apiVersion": "2015-04-08",
+            "location": "East US",
+            "tags": {},
+            "properties": {
+                "databaseAccountOfferType": "Standard",
+                "consistencyPolicy": {
+                    "defaultConsistencyLevel": "Session",
+                    "maxIntervalInSeconds": 5,
+                    "maxStalenessPrefix": 100
+                },
+                "name": "[parameters('databaseAccounts_gab_nosql_dev01_name')]"
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/170f5740-3e45-4a68-a9f8-435d6fc3c166/resourceGroups/GAB-Dev01/providers/microsoft.insights/components/gab-dev01'.",
+            "type": "microsoft.insights/components",
+            "kind": "web",
+            "name": "[parameters('components_gab_dev01_name')]",
+            "apiVersion": "2014-04-01",
+            "location": "eastus",
+            "tags": {
+                "hidden-link:/subscriptions/170f5740-3e45-4a68-a9f8-435d6fc3c166/resourceGroups/GAB-Dev01/providers/Microsoft.Web/sites/gab-dev01": "Resource"
+            },
+            "properties": {
+                "ApplicationId": "[parameters('components_gab_dev01_name')]"
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/170f5740-3e45-4a68-a9f8-435d6fc3c166/resourceGroups/gab-dev01/providers/Microsoft.Storage/storageAccounts/gabstoragedev01'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_RAGRS",
+                "tier": "Standard"
+            },
+            "kind": "BlobStorage",
+            "name": "[parameters('storageAccounts_gabstoragedev01_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "eastus",
+            "tags": {},
+            "properties": {
+                "accessTier": "Hot"
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/170f5740-3e45-4a68-a9f8-435d6fc3c166/resourceGroups/GAB-Dev01/providers/Microsoft.Web/sites/gab-dev01'.",
+            "type": "Microsoft.Web/sites",
+            "kind": "app",
+            "name": "[parameters('sites_gab_dev01_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "East US",
+            "tags": {
+                "hidden-related:/subscriptions/170f5740-3e45-4a68-a9f8-435d6fc3c166/resourcegroups/Default-Web-EastUS/providers/Microsoft.Web/serverfarms/Default1": "empty"
+            },
+            "properties": {
+                "name": "[parameters('sites_gab_dev01_name')]",
+                "hostNames": [
+                    "[concat(parameters('sites_gab_dev01_name'),'.azurewebsites.net')]"
+                ],
+                "enabledHostNames": [
+                    "[concat(parameters('sites_gab_dev01_name'),'.azurewebsites.net')]",
+                    "[concat(parameters('sites_gab_dev01_name'),'.scm.azurewebsites.net')]"
+                ],
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_gab_dev01_name'),'.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    },
+                    {
+                        "name": "[concat(parameters('sites_gab_dev01_name'),'.scm.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    }
+                ],
+                "serverFarmId": "[parameters('sites_gab_dev01_serverFarmId')]"
+            },
+            "dependsOn": []
+        }
+    ]
+}

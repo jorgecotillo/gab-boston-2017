@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "databaseAccounts_gab_nosql_dev01_name": {
+            "value": "gab-nosql-qa06"
+        },
+        "databaseAccounts_gab_nosql_dev01_name_1": {
+            "value": "gab-nosql-qa06"
+        },
+        "components_gab_dev01_name": {
+            "value": "gab-qa06"
+        },
+        "storageAccounts_gabstoragedev01_name": {
+            "value": "gabstorageqa06"
+        },
+        "sites_gab_dev01_name": {
+            "value": "gab-qa06"
+        },
+        "sites_gab_dev01_serverFarmId": {
+            "value": "/subscriptions/170f5740-3e45-4a68-a9f8-435d6fc3c166/resourceGroups/Default-Web-EastUS/providers/Microsoft.Web/serverfarms/Default1"
+        }
+    }
+}
